@@ -9,6 +9,8 @@ import react from '@astrojs/react';
 
 import sitemap from '@astrojs/sitemap';
 
+import analogjsangular from '@analogjs/astro-angular';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://s23010843.github.io',
@@ -18,5 +20,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [vue(), react(), sitemap()]
+  integrations: [vue(), react(), sitemap(), analogjsangular()]
 });

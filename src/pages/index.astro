@@ -4,12 +4,13 @@ import Layout from '../layouts/Layout.astro';
 
 import VueWelcome from '../components/VueWelcome.vue';
 import ReactWelcome from '../components/ReactWelcome.jsx';
+import AngularWelcome from '../components/welcome.component.ts';
 ---
 
-<Layout>
+<Layout title="Data Binding Example">
 	<!-- <Welcome /> -->
 	<p class="text-blue-500">Tailwind CSS is working!</p>
 	<VueWelcome/>
 	<ReactWelcome/>
-	
+	<AngularWelcome/>
 </Layout>
