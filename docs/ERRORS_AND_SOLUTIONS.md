@@ -9,10 +9,12 @@ pnpm add @astrojs/vue
 ## Build Time Error
 Old code (in `index.astro`):
 ```astro
+<ReactWelcome/>
 <AngularWelcome/>
 ```
 
 Corrected code (in `index.astro`):
 ```astro
+<ReactWelcome client:load />
 <AngularWelcome client:load />
 ```
