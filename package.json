@@ -9,7 +9,7 @@
     "astro": "astro",
     "pnpm-update":"pnpm add -g pnpm",
     "clear":"pnpm store prune",
-    "install": "pnpm install"
+    "pnpm-install": "pnpm install"
   },
   "dependencies": {
     "@analogjs/astro-angular": "^2.0.5",
