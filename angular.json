@@ -33,7 +33,7 @@
         }
       },
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "src/components/angular",
       "prefix": "app",
       "architect": {
         "build": {

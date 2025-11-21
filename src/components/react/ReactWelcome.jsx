@@ -3,7 +3,7 @@ import React from 'react';
 export default function ReactWelcome() {
   return React.createElement(
     'h1',
-    { style: { color: 'blue', fontSize: '24px', textAlign: 'center' } },
+    { style: { color: 'blue' } },
     'React is working!'
   );
 }
