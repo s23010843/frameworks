@@ -13,8 +13,8 @@ import analogjsangular from '@analogjs/astro-angular';
 
 // https://astro.build/config
 export default defineConfig({
-  //site: 'https://s23010843.github.io/frameworks',
-  //base: '/',
+  site: 'https://s23010843.github.io',
+  base: '/frameworks',
 
   vite: {
     plugins: [tailwindcss()]
