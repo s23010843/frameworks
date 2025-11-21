@@ -9,7 +9,6 @@
     "astro": "astro",
     "pnpm-update":"pnpm add -g pnpm",
     "clear":"pnpm store prune",
-    "clean": "pnpm run clear && if exist node_modules rmdir /s /q node_modules && if exist dist rmdir /s /q dist && if exist .astro rmdir /s /q .astro",
     "install": "pnpm install"
   },
   "dependencies": {
