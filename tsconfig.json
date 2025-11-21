@@ -5,10 +5,11 @@
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "distReact"
   ],
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "strict": true
   }
 }

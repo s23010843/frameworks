@@ -20,7 +20,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [vue(), react(), sitemap(), analogjsangular({
-      ssr: false // IMPORTANT: Angular must not SSR
-    })]
+  integrations: [vue(), react(), sitemap(), analogjsangular()]
 });

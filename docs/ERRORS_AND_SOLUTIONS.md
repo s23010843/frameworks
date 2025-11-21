@@ -15,6 +15,6 @@ Old code (in `index.astro`):
 
 Corrected code (in `index.astro`):
 ```astro
-<ReactWelcome client:load />
+<ReactWelcome client:only="react" />
 <AngularWelcome client:load />
 ```
