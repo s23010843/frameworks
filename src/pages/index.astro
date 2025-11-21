@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout.astro';
 import VueWelcome from '../components/VueWelcome.vue';
 import ReactWelcome from '../components/ReactWelcome.jsx';
 import AngularWelcome from '../components/welcome.component';
+import SvelteWelcome from '../components/SvelteWelcome.svelte';
 ---
 
 <Layout title="Data Binding Example">
@@ -13,4 +14,5 @@ import AngularWelcome from '../components/welcome.component';
 	<VueWelcome/>
 	<ReactWelcome client:only="react" />
 	<AngularWelcome client:load />
+	<SvelteWelcome />
 </Layout>
