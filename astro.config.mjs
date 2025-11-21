@@ -13,7 +13,7 @@ import analogjsangular from '@analogjs/astro-angular';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://s23010843.github.io/frameworks',
+  //site: 'https://s23010843.github.io/frameworks',
   //base: '/',
 
   vite: {
