@@ -1,0 +1,27 @@
+---
+import { spawnSync } from 'child_process';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const scriptPath = path.join(__dirname, 'PythonWelcome.py');
+
+function runPythonScript() {
+  const candidates = ['python', 'py', 'python3'];
+  for (const cmd of candidates) {
+    const res = spawnSync(cmd, [scriptPath], { encoding: 'utf8' });
+    if (res.status === 0 && res.stdout) return res.stdout.trim();
+  }
+  throw new Error('Python interpreter not found');
+}
+
+let output = '';
+try {
+  output = runPythonScript();
+} catch (error) {
+  output = `Error: ${error instanceof Error ? error.message : String(error)}`;
+}
+---
+
+<p style="color: #3776ab;">{output}</p>
