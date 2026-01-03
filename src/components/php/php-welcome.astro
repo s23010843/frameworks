@@ -1,0 +1,27 @@
+---
+import { spawnSync } from 'child_process';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const scriptPath = path.join(__dirname, 'hello-world.php');
+
+function runPhpScript() {
+  const candidates = ['php'];
+  for (const cmd of candidates) {
+    const res = spawnSync(cmd, [scriptPath], { encoding: 'utf8' });
+    if (res.status === 0 && res.stdout) return res.stdout.trim();
+  }
+  throw new Error('PHP interpreter not found');
+}
+
+let output = '';
+try {
+  output = runPhpScript();
+} catch (error) {
+  output = `Error: ${error instanceof Error ? error.message : String(error)}`;
+}
+---
+
+<p style="color: #777bb4;">{output}</p>
