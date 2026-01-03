@@ -6,6 +6,9 @@ import VueWelcome from '../components/vue/VueWelcome.vue';
 import ReactWelcome from '../components/react/ReactWelcome.jsx';
 import AngularWelcome from '../components/angular/welcome.component';
 import SvelteWelcome from '../components/svelte/SvelteWelcome.svelte';
+import JsButton from '../components/js/JsButton.astro';
+import PyWelcome from '../components/python/py-welcome.astro';
+import PhpWelcome from '../components/php/php-welcome.astro';
 ---
 
 <Layout title="Data Binding Example">
@@ -15,4 +18,7 @@ import SvelteWelcome from '../components/svelte/SvelteWelcome.svelte';
 	<ReactWelcome client:only="react" />
 	<AngularWelcome client:load />
 	<SvelteWelcome />
+	<JsButton />
+	<PyWelcome />
+	<PhpWelcome />
 </Layout>
