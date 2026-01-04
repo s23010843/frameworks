@@ -17,7 +17,7 @@ import svelte from '@astrojs/svelte';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://s23010843.github.io',
-  base: '/',// '/frameworks',
+  base: '/frameworks',
 
   vite: {
     // @ts-ignore - Tailwind Vite plugin type compatibility
