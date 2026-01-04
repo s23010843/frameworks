@@ -8,20 +8,36 @@ const __dirname = path.dirname(__filename);
 const scriptPath = path.join(__dirname, 'PythonWelcome.py');
 
 function runPythonScript() {
-  const candidates = ['python', 'py', 'python3'];
+  const candidates = [
+    'python',
+    'py',
+    'python3',
+    '/usr/bin/python3',
+    '/usr/local/bin/python3',
+    'C:\\Python311\\python.exe',
+    'C:\\Python312\\python.exe'
+  ];
+
   for (const cmd of candidates) {
-    const res = spawnSync(cmd, [scriptPath], { encoding: 'utf8' });
-    if (res.status === 0 && res.stdout) return res.stdout.trim();
+    try {
+      const res = spawnSync(cmd, [scriptPath], {
+        encoding: 'utf8',
+        env: { ...process.env },
+        stdio: ['pipe', 'pipe', 'pipe']
+      });
+
+      if (!res.error && res.status === 0 && res.stdout) {
+        return res.stdout.trim();
+      }
+    } catch {
+      continue;
+    }
   }
-  throw new Error('Python interpreter not found');
+
+  return '🐍 Python component (Python not available during local build)';
 }
 
-let output = '';
-try {
-  output = runPythonScript();
-} catch (error) {
-  output = `Error: ${error instanceof Error ? error.message : String(error)}`;
-}
+const output = runPythonScript();
 ---
 
 <p style="color: #3776ab;">{output}</p>
