@@ -30,11 +30,37 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
+          extensions: none
+          tools: none
       
-      - name: Install, build, and upload your site
-        uses: withastro/action@v5
+      - name: Verify PHP installation
+        run: |
+          php --version
+          which php
+          echo "$PATH"
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          package-manager: pnpm@latest
+          node-version: '20'
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build site
+        run: pnpm build
+        env:
+          PATH: ${{ env.PATH }}
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
 
   deploy:
     needs: build

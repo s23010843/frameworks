@@ -8,20 +8,28 @@ const __dirname = path.dirname(__filename);
 const scriptPath = path.join(__dirname, 'hello-world.php');
 
 function runPhpScript() {
-  const candidates = ['php'];
+  const candidates = ['php', '/usr/bin/php', 'php-cli'];
   for (const cmd of candidates) {
-    const res = spawnSync(cmd, [scriptPath], { encoding: 'utf8' });
-    if (res.status === 0 && res.stdout) return res.stdout.trim();
+    try {
+      const res = spawnSync(cmd, [scriptPath], { 
+        encoding: 'utf8',
+        env: { ...process.env }
+      });
+      if (res.error) {
+        console.warn(`Failed to execute ${cmd}:`, res.error.message);
+        continue;
+      }
+      if (res.status === 0 && res.stdout) return res.stdout.trim();
+      if (res.stderr) console.warn(`PHP stderr:`, res.stderr);
+    } catch (err) {
+      console.warn(`Error trying ${cmd}:`, err);
+      continue;
+    }
   }
-  throw new Error('PHP interpreter not found');
+  return 'PHP interpreter not available during build';
 }
 
-let output = '';
-try {
-  output = runPhpScript();
-} catch (error) {
-  output = `Error: ${error instanceof Error ? error.message : String(error)}`;
-}
+const output = runPhpScript();
 ---
 
 <p style="color: #777bb4;">{output}</p>
