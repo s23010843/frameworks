@@ -19,7 +19,16 @@ export default defineConfig({
   base: '/',// '/frameworks',
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        onwarn(warning, warn) {
+          // Suppress unhandled rejection warnings
+          if (warning.code === 'UNRESOLVED_IMPORT') return;
+          warn(warning);
+        }
+      }
+    }
   },
 
   integrations: [vue(), react(), sitemap(), analogjsangular(), svelte()]
