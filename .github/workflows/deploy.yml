@@ -38,19 +38,18 @@ jobs:
           php --version
           which php
           echo "$PATH"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+          run_install: false
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
-
-      - name: Ensure pnpm is available (Corepack + fallback)
-        run: |
-          if ! command -v pnpm >/dev/null 2>&1; then
-            corepack enable || true
-            corepack prepare pnpm@latest --activate || npm install -g pnpm@latest
-          fi
 
       - name: Verify pnpm
         run: pnpm -v
