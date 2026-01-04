@@ -45,10 +45,12 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
-      - name: Enable Corepack and activate pnpm
+      - name: Ensure pnpm is available (Corepack + fallback)
         run: |
-          corepack enable
-          corepack prepare pnpm@9.8.0 --activate
+          if ! command -v pnpm >/dev/null 2>&1; then
+            corepack enable || true
+            corepack prepare pnpm@latest --activate || npm install -g pnpm@latest
+          fi
 
       - name: Verify pnpm
         run: pnpm -v
