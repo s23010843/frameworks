@@ -1,27 +1,31 @@
 ---
-import { spawnSync } from 'child_process';
+// Read the Python file content to execute in browser
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const scriptPath = path.join(__dirname, 'PythonWelcome.py');
-
-function runPythonScript() {
-  const candidates = ['python', 'py', 'python3'];
-  for (const cmd of candidates) {
-    const res = spawnSync(cmd, [scriptPath], { encoding: 'utf8' });
-    if (res.status === 0 && res.stdout) return res.stdout.trim();
-  }
-  throw new Error('Python interpreter not found');
-}
-
-let output = '';
-try {
-  output = runPythonScript();
-} catch (error) {
-  output = `Error: ${error instanceof Error ? error.message : String(error)}`;
-}
+const pythonCode = fs.readFileSync(scriptPath, 'utf-8');
 ---
 
-<p style="color: #3776ab;">{output}</p>
+<p id="python-output" style="color: #3776ab;">Loading Python...</p>
+
+<script define:vars={{ pythonCode }}>
+  async function runPython() {
+    try {
+      // @ts-ignore
+      const pyodide = await loadPyodide();
+      // Capture stdout
+      pyodide.setStdout({ batched: (msg) => {
+        document.getElementById('python-output').textContent = msg;
+      }});
+      await pyodide.runPythonAsync(pythonCode);
+    } catch (error) {
+      document.getElementById('python-output').textContent = 'Error: ' + error.message;
+    }
+  }
+  runPython();
+</script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
