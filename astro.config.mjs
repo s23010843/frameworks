@@ -1,4 +1,5 @@
 // @ts-check
+// @ts-ignore - Tailwind Vite plugin type compatibility
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
@@ -19,6 +20,7 @@ export default defineConfig({
   base: '/',// '/frameworks',
 
   vite: {
+    // @ts-ignore - Tailwind Vite plugin type compatibility
     plugins: [tailwindcss()],
     build: {
       rollupOptions: {
